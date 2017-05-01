@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Send sunrise tweet for Charleston.
+# Send sunrise or sunset tweet.
 #
 if [ "$#" -ne 4 ]
 then
@@ -17,7 +17,7 @@ latitude="$2"
 longitude="$3"
 location="$4"
 echo "Type: $type Latitude: $latitude Longitude: $longitude Location: $location"
-cd /home/htplainf/projects/SunRiseSunSetMonitor
+cd ~/projects/SunRiseSunSetMonitor
 git pull
 rm -rf out/production/SunRiseSunSetMonitor
 mkdir -p out/production/SunRiseSunSetMonitor
