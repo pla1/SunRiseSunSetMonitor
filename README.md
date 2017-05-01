@@ -4,5 +4,5 @@ Uses the following:
 
 * [SikuliX](http://sikulix.com) 
 * [GSON](https://github.com/google/gson) 
-* [SunsetWX.com](https://https://sunsetwx.com)
+* [SunsetWX.com](https://sunsetwx.com)
 * [sunrise-sunset.org](https://sunrise-sunset.org)
