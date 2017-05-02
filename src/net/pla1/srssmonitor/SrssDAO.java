@@ -71,8 +71,10 @@ public class SrssDAO {
             return null;
         }
         String timeDisplay = sunrise ? time.getResults().getSunriseDateDisplay() : time.getResults().getSunsetDateDisplay();
-        return String.format("%s quality is %s for %s. %s is at %s.",
+        String tweetText = String.format("%s quality is %s for %s. %s is at %s.",
                 type, qualityString, location, type, timeDisplay);
+        System.out.println(tweetText);
+        return tweetText;
     }
 
     private Quality getQuality(boolean sunrise, double latitude, double longitude) throws IOException {
