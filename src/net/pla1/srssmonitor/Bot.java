@@ -6,7 +6,6 @@ import org.sikuli.script.Screen;
 import org.sikuli.basics.Settings;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class Bot {
@@ -21,13 +20,12 @@ public class Bot {
         Properties properties = new Properties();
         properties.load(new FileInputStream(Utils.PROPERTY_FILE_NAME));
         Screen s = new Screen();
-        Utils.sleep(5);
+        s.wait("images/username_field.png", 60);
         s.click("images/username_field.png");
         s.type(properties.getProperty(Utils.PROPERTY_TWITTER_USER_NAME));
         s.click("images/password_field.png");
         s.type(properties.getProperty(Utils.PROPERTY_TWITTER_PASSWORD));
         s.type(Key.ENTER);
-
     }
 
     public void tweet(String text, String imageFileName) throws Exception {

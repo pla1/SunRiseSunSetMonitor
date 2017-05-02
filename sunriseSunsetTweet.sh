@@ -2,9 +2,9 @@
 #
 # Send sunrise or sunset tweet.
 #
-if [ "$#" -ne 4 ]
+if [ "$#" -ne 5 ]
 then
-  echo "Invalid number of arguments. There should be 4 arguments. They are type, latitude, longitude, and location. For example $0 sunrise 32.894205 -80.037054 \"Charleston SC\""
+  echo "Invalid number of arguments. There should be 5 arguments. They are type, latitude, longitude, location and email address. For example $0 sunrise 32.894205 -80.037054 \"Charleston SC\" joe@domain.com"
   exit -1
 fi
 type="$1"
@@ -16,10 +16,20 @@ fi
 latitude="$2"
 longitude="$3"
 location="$4"
-echo "Type: $type Latitude: $latitude Longitude: $longitude Location: $location"
+emailAddress="$5"
+echo "Type: $type Latitude: $latitude Longitude: $longitude Location: $location Email address: $emailAddress"
 cd ~/projects/SunRiseSunSetMonitor
 git pull
 rm -rf out/production/SunRiseSunSetMonitor
 mkdir -p out/production/SunRiseSunSetMonitor
 /usr/bin/javac -cp lib/sikulixapi.jar:lib/gson-2.8.0.jar -d out/production/SunRiseSunSetMonitor src/net/pla1/srssmonitor/*.java
-/usr/bin/java -cp out/production/SunRiseSunSetMonitor:lib/* net.pla1.srssmonitor.SrssDAO "$type" "$latitude" "$longitude" "$location"
+/usr/bin/java -cp out/production/SunRiseSunSetMonitor:lib/* net.pla1.srssmonitor.SrssDAO "$xtype" "$latitude" "$longitude" "$location" > /tmp/sunriseSunsetTweet.log
+status=$?
+if [ $status -ne 0 ]
+then
+  errorDate="$(date)"
+  cat /tmp/sunriseSunsetTweet.log | /usr/bin/mail -s "Error occurred attempting to tweet $type quality. - $errorDate" "$emailAddress"
+  /usr/bin/gnome-screenshot -f /tmp/sunriseSunsetScreenshot.png
+  ( /usr/bin/uuencode /tmp/sunriseSunsetScreenshot.png sunriseSunsetScreenshot.png; echo "Screenshot when error occurred - $errorDate" ) | /usr/bin/mail -s "Sunrise sunset tweet error screenshot - $errorDate" "$emailAddress"
+fi
+killall chromium-browser

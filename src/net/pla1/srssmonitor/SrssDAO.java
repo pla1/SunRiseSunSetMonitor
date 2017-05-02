@@ -6,65 +6,41 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 
 public class SrssDAO {
-    private static final double LATITUDE_CHARLESTON_BATTERY = 32.769484;
-    private static final double LONGITUDE_CHARLESTON_BATTERY = -79.929071;
     private LoginResponse loginResponse;
 
-    public static void main(String[] args) throws Exception {
-        double latitude = LATITUDE_CHARLESTON_BATTERY;
-        double longitude = LONGITUDE_CHARLESTON_BATTERY;
-        String location = "Charleston SC";
-        boolean sunrise = true;
-        SrssDAO dao = new SrssDAO();
-        if (args.length == 4) {
-            int i = 0;
-            sunrise = "sunrise".equalsIgnoreCase(args[i++]);
-            latitude = Double.parseDouble(args[i++]);
-            longitude = Double.parseDouble(args[i++]);
-            location = args[i++];
-            dao.sendTweet(sunrise, latitude, longitude, location);
-            System.exit(0);
+    public static void main(String[] args) {
+        try {
+            SrssDAO dao = new SrssDAO();
+            if (args.length == 4) {
+                int i = 0;
+                boolean sunrise = "sunrise".equalsIgnoreCase(args[i++]);
+                double latitude = Double.parseDouble(args[i++]);
+                double longitude = Double.parseDouble(args[i++]);
+                String location = args[i++];
+                dao.sendTweet(sunrise, latitude, longitude, location);
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
         }
-        if (false) {
-            Quality quality = dao.getQuality(sunrise, latitude, longitude);
-            Dusk dusk = quality.getFeatures().get(0).getProperties().getDusk();
-            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse(dusk.getCivil());
-            System.out.format("Astronomical: %s Civil: %s Nautical: %s\n", dusk.getAstronomical(), date, dusk.getNautical());
-            System.exit(0);
-        }
-        if (false) {
-            System.out.println(dao.getTweet(sunrise, latitude, longitude, location));
-            System.exit(0);
 
-        }
-        if (true) {
-            dao.sendTweet(sunrise, latitude, longitude, location);
-            System.exit(0);
-        }
     }
 
     public SrssDAO() throws Exception {
         login();
     }
 
-    public void sendTweet(boolean sunrise, double latitude, double longitude, String location) {
-        try {
-            String text = getTweet(sunrise, latitude, longitude, location);
-            Bot bot = new Bot();
-            String type = sunrise ? "sunrise" : "sunset";
-            String imageFileName = String.format("/tmp/%s.png", type);
-            Utils.saveImage(String.format("https://sunsetwx.com/%s/%s_et.png", type, type), imageFileName);
-            bot.tweet(String.format("%s %s %s", "@pla1", text, "https://sunsetwx.com/"), imageFileName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.format("Could not send tweet. Error: %s.\n", e.getLocalizedMessage());
-            return;
-        }
+    public void sendTweet(boolean sunrise, double latitude, double longitude, String location) throws Exception {
+        String text = getTweet(sunrise, latitude, longitude, location);
+        Bot bot = new Bot();
+        String type = sunrise ? "sunrise" : "sunset";
+        String imageFileName = String.format("/tmp/%s.png", type);
+        Utils.saveImage(String.format("https://sunsetwx.com/%s/%s_et.png", type, type), imageFileName);
+        bot.tweet(String.format("%s %s %s", "@pla1", text, "https://sunsetwx.com/"), imageFileName);
     }
 
     private String getTweet(boolean sunrise, double latitude, double longitude, String location) throws IOException {
