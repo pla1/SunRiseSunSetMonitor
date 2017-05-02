@@ -32,4 +32,5 @@ then
   /usr/bin/gnome-screenshot -f /tmp/sunriseSunsetScreenshot.png
   ( /usr/bin/uuencode /tmp/sunriseSunsetScreenshot.png sunriseSunsetScreenshot.png; echo "Screenshot when error occurred - $errorDate" ) | /usr/bin/mail -s "Sunrise sunset tweet error screenshot - $errorDate" "$emailAddress"
 fi
+sleep 5
 killall chromium-browser
