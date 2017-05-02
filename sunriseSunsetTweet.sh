@@ -23,7 +23,7 @@ git pull
 rm -rf out/production/SunRiseSunSetMonitor
 mkdir -p out/production/SunRiseSunSetMonitor
 /usr/bin/javac -cp lib/sikulixapi.jar:lib/gson-2.8.0.jar -d out/production/SunRiseSunSetMonitor src/net/pla1/srssmonitor/*.java
-/usr/bin/java -cp out/production/SunRiseSunSetMonitor:lib/* net.pla1.srssmonitor.SrssDAO "$xtype" "$latitude" "$longitude" "$location" > /tmp/sunriseSunsetTweet.log
+/usr/bin/java -cp out/production/SunRiseSunSetMonitor:lib/* net.pla1.srssmonitor.SrssDAO "$type" "$latitude" "$longitude" "$location" > /tmp/sunriseSunsetTweet.log
 status=$?
 if [ $status -ne 0 ]
 then

@@ -12,6 +12,10 @@ public class SrssDAO {
     private LoginResponse loginResponse;
 
     public static void main(String[] args) {
+        System.out.format("Arguments length: %d\n", args.length);
+        for (int i = 0 ; i < args.length; i++) {
+            System.out.format("Argument index: %d value: \"%s\"\n", i, args[i]);
+        }
         try {
             SrssDAO dao = new SrssDAO();
             if (args.length == 4) {
@@ -35,6 +39,7 @@ public class SrssDAO {
     }
 
     public void sendTweet(boolean sunrise, double latitude, double longitude, String location) throws Exception {
+        System.out.format("Sunrise: %s Latitude: %s Longitude: %s Location: %s\n", sunrise, latitude, longitude, location);
         String text = getTweet(sunrise, latitude, longitude, location);
         Bot bot = new Bot();
         String type = sunrise ? "sunrise" : "sunset";
