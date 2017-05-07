@@ -18,6 +18,8 @@ public class Bot {
         Utils.sleep(5);
         s.type(Key.ESC);
         Utils.sleep(2);
+        String[] commandParts = { "/usr/bin/gnome-screenshot", "-f", "/tmp/screenshot.png" };
+        Utils.run(commandParts);
         if (s.exists("images/lock_screen_password_field.png") != null) {
             System.out.format("Screen is locked. Clicking on password field.\n");
             s.click("images/lock_screen_password_field.png");
