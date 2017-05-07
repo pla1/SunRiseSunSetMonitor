@@ -11,7 +11,23 @@ import java.util.Properties;
 public class Bot {
     public static void main(String[] args) throws Exception {
         Bot bot = new Bot();
+    }
 
+    private void unlockScreen() throws Exception {
+        Screen s = new Screen();
+        s.type(Key.ESC);
+        Utils.sleep(2);
+        if (s.exists("images/lock_screen_password_field.png") != null) {
+            System.out.format("Screen is locked. Clicking on password field.\n");
+            s.click("images/lock_screen_password_field.png");
+            System.out.format("Typing password to unlock screen\n");
+            Properties properties = new Properties();
+            properties.load(new FileInputStream(Utils.PROPERTY_FILE_NAME));
+            s.type(properties.getProperty(Utils.PROPERTY_UNLOCK_PASSWORD));
+            s.type(Key.ENTER);
+        } else {
+            System.out.format("Screen is not locked\n");
+        }
     }
 
     private void loginTwitter() throws Exception {
@@ -29,6 +45,7 @@ public class Bot {
     }
 
     public void tweet(String text, String imageFileName) throws Exception {
+        unlockScreen();
         loginTwitter();
         Screen s = new Screen();
         s.click("images/tweet_button.png");

@@ -12,6 +12,7 @@ public class Utils {
     public static final String PROPERTY_TWITTER_USER_NAME = "twitterUsername";
     public static final String PROPERTY_TWITTER_PASSWORD = "twitterPassword";
     public static final String PROPERTY_FILE_NAME = "/etc/net.pla1.srssmonitor.SrssDAO.properties";
+    public static final String PROPERTY_UNLOCK_PASSWORD = "unlockPassword";
 
     public static void sleep(int seconds) {
         try {
