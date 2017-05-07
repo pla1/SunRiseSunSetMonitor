@@ -11,6 +11,10 @@ import java.util.Properties;
 public class Bot {
     public static void main(String[] args) throws Exception {
         Bot bot = new Bot();
+        if (true) {
+            bot.unlockScreen();
+            System.exit(0);
+        }
     }
 
     private void unlockScreen() throws Exception {
@@ -18,8 +22,9 @@ public class Bot {
         Utils.sleep(5);
         s.type(Key.ESC);
         Utils.sleep(2);
-        String[] commandParts = { "/usr/bin/gnome-screenshot", "-f", "/tmp/screenshot.png" };
-        Utils.run(commandParts);
+      //  String[] commandParts = {"/usr/bin/gnome-screenshot", "-f", "/tmp/screenshot.png"};
+     //   Utils.run(commandParts);
+        Utils.screenshot(s);
         if (s.exists("images/lock_screen_password_field.png") != null) {
             System.out.format("Screen is locked. Clicking on password field.\n");
             s.click("images/lock_screen_password_field.png");
@@ -29,6 +34,7 @@ public class Bot {
             s.type(properties.getProperty(Utils.PROPERTY_UNLOCK_PASSWORD));
             s.type(Key.ENTER);
         } else {
+            Utils.screenshot(s);
             System.out.format("Screen is not locked\n");
         }
     }

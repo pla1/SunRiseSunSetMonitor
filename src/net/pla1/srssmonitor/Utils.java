@@ -1,8 +1,12 @@
 package net.pla1.srssmonitor;
 
+import org.sikuli.script.Screen;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -140,5 +144,20 @@ public class Utils {
         calendar.setTime(date);
         return today.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)
                 && today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR);
+    }
+
+    public static void screenshot(Screen s) {
+        try {
+            File fromFile = new File(s.capture().getFile());
+            File toFile = File.createTempFile("screenshot_", ".png");
+            copyFile(fromFile, toFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void copyFile(File from, File to) throws IOException {
+        Files.copy(from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        System.out.format("Copied %s to %s.\n", from.getAbsoluteFile(), to.getAbsoluteFile());
     }
 }
