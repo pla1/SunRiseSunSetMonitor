@@ -15,6 +15,7 @@ public class Bot {
 
     private void unlockScreen() throws Exception {
         Screen s = new Screen();
+        Utils.sleep(5);
         s.type(Key.ESC);
         Utils.sleep(2);
         if (s.exists("images/lock_screen_password_field.png") != null) {
