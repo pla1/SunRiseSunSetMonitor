@@ -54,7 +54,7 @@ public class Bot {
     }
 
     public void tweet(String text, String imageFileName) throws Exception {
-        unlockScreen();
+       // unlockScreen();
         loginTwitter();
         Screen s = new Screen();
         s.click("images/tweet_button.png");

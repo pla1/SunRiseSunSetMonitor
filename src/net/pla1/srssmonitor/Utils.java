@@ -57,7 +57,7 @@ public class Utils {
     }
 
     public static void startBrowser(String urlString) {
-        String[] commandParts = {"/usr/bin/chromium-browser", "--incognito", urlString};
+        String[] commandParts = {"/usr/bin/chromium-browser", "--incognito", "--kiosk", urlString};
         runNoOutput(commandParts);
     }
 
