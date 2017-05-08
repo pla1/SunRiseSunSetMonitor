@@ -19,6 +19,7 @@ public class Bot {
 
     private void unlockScreen() throws Exception {
         Screen s = new Screen();
+        s.setAutoWaitTimeout(30);
         Utils.sleep(5);
         s.type(Key.ESC);
         Utils.sleep(2);
@@ -45,6 +46,7 @@ public class Bot {
         Properties properties = new Properties();
         properties.load(new FileInputStream(Utils.PROPERTY_FILE_NAME));
         Screen s = new Screen();
+        s.setAutoWaitTimeout(30);
         s.wait("images/username_field.png", 60);
         s.click("images/username_field.png");
         s.type(properties.getProperty(Utils.PROPERTY_TWITTER_USER_NAME));
@@ -57,6 +59,7 @@ public class Bot {
        // unlockScreen();
         loginTwitter();
         Screen s = new Screen();
+        s.setAutoWaitTimeout(30);
         s.click("images/tweet_button.png");
         s.click("images/compose_new_tweet_banner.png");
         s.type(text);
