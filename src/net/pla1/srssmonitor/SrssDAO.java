@@ -40,7 +40,7 @@ public class SrssDAO {
 
     public void sendTweet(boolean sunrise, double latitude, double longitude, String location) throws Exception {
         System.out.format("Sunrise: %s Latitude: %s Longitude: %s Location: %s\n", sunrise, latitude, longitude, location);
-        String text = getTweet(sunrise, latitude, longitude, location);
+        String text = getTweetText(sunrise, latitude, longitude, location);
         Bot bot = new Bot();
         String type = sunrise ? "sunrise" : "sunset";
         String imageFileName = String.format("/tmp/%s.png", type);
@@ -48,7 +48,7 @@ public class SrssDAO {
         bot.tweet(String.format("%s %s %s", "@pla1", text, "https://sunsetwx.com/"), imageFileName);
     }
 
-    private String getTweet(boolean sunrise, double latitude, double longitude, String location) throws IOException {
+    private String getTweetText(boolean sunrise, double latitude, double longitude, String location) throws IOException {
         Quality quality = getQuality(sunrise, latitude, longitude);
         if (quality == null || quality.getFeatures().size() == 0) {
             System.out.println("Quality does have any features. Returning null.");
@@ -58,7 +58,6 @@ public class SrssDAO {
         String qualityString = quality.getFeatures().get(0).getProperties().getQuality();
         qualityString = Utils.toLower(qualityString);
         System.out.format("%s quality is %s.\n", type, qualityString);
-
         if (!"Good".equalsIgnoreCase(qualityString)
                 && !"Great".equalsIgnoreCase(qualityString)) {
             System.out.println("Quality is not good or great. Returning null.");
