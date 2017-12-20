@@ -71,7 +71,7 @@ public class Bot {
         if (Utils.isNotBlank(imageFileName)) {
             s.click("images/camera_button.png");
           //  s.click("images/open_files_header.png");
-            s.click("images/file_system_ubuntu_mate.png");
+            s.click("images/open_label_file_system.png");
             Utils.sleep(1);
             s.type(imageFileName);
             s.type(Key.ENTER);
