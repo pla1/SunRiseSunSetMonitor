@@ -67,15 +67,21 @@ public class Bot {
         s.click("images/compose_new_tweet_banner.png");
         System.out.println("Clicked compose new tweet banner");
         s.type(Key.TAB);
+        System.out.println("Tabbed into textarea");
         s.type(text);
         if (Utils.isNotBlank(imageFileName)) {
             s.click("images/camera_button.png");
+            System.out.println("Clicked camera button");
           //  s.click("images/open_files_header.png");
             s.click("images/open_label_file_system.png");
+            System.out.println("Clicked filed system header.");
             Utils.sleep(1);
             s.type(imageFileName);
+            System.out.format("Typed file name %s.\n", imageFileName);
             s.type(Key.ENTER);
+            System.out.println("Pressed ENTER.");
             s.click("images/tweet_button_bigger.png");
+            System.out.println("Clicked second tweet button.");
         } else {
             s.click("images/tweet_button_bigger.png");
         }
