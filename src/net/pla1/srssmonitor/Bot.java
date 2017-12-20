@@ -60,8 +60,11 @@ public class Bot {
         loginTwitter();
         Screen s = new Screen();
         s.setAutoWaitTimeout(30);
+        System.out.println("About to click tweet button");
         s.click("images/tweet_button.png");
+        System.out.println("Clicked tweet button");
         s.click("images/compose_new_tweet_banner.png");
+        System.out.println("Clicked compose new tweet banner");
         s.type(text);
         if (Utils.isNotBlank(imageFileName)) {
             s.click("images/camera_button.png");
