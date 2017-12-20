@@ -66,6 +66,7 @@ public class Bot {
         System.out.println("Clicked tweet button");
         s.click("images/compose_new_tweet_banner.png");
         System.out.println("Clicked compose new tweet banner");
+        s.type(Key.TAB);
         s.type(text);
         if (Utils.isNotBlank(imageFileName)) {
             s.click("images/camera_button.png");
