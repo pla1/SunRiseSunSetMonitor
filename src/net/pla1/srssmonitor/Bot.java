@@ -60,6 +60,7 @@ public class Bot {
         loginTwitter();
         Screen s = new Screen();
         s.setAutoWaitTimeout(30);
+        Utils.sleep(5);
         System.out.println("About to click tweet button");
         s.click("images/tweet_button.png");
         System.out.println("Clicked tweet button");
