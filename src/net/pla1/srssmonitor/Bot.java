@@ -85,7 +85,7 @@ public class Bot {
         } else {
             s.click("images/tweet_button_bigger.png");
         }
-
+        Utils.sleep(5);
     }
 
 
