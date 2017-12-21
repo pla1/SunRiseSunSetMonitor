@@ -2,6 +2,7 @@
 #
 # Send sunrise or sunset tweet.
 #
+logger "$0 Started"
 if [ "$#" -ne 5 ]
 then
   echo "Invalid number of arguments. There should be 5 arguments. They are type, latitude, longitude, location and email address. For example $0 sunrise 32.894205 -80.037054 \"Charleston SC\" joe@domain.com"
@@ -28,9 +29,12 @@ status=$?
 if [ $status -ne 0 ]
 then
   errorDate="$(date)"
-  cat /tmp/sunriseSunsetTweet.log | /usr/bin/mail -s "Error occurred attempting to tweet $type quality. - $errorDate" "$emailAddress"
+  subject="Error occurred attempting to tweet $type quality. - $errorDate" "$emailAddress"
+  logger "$0 $subject"
+  cat /tmp/sunriseSunsetTweet.log | /usr/bin/mail -s "$subject" "$emailAddress"
   /usr/bin/gnome-screenshot -f /tmp/sunriseSunsetScreenshot.png
   ( /usr/bin/uuencode /tmp/sunriseSunsetScreenshot.png sunriseSunsetScreenshot.png; echo "Screenshot when error occurred - $errorDate" ) | /usr/bin/mail -s "Sunrise sunset tweet error screenshot - $errorDate" "$emailAddress"
 fi
 sleep 5
 killall chromium-browser
+logger "$0 Finished"
