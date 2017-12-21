@@ -44,7 +44,9 @@ public class SrssDAO {
         Bot bot = new Bot();
         String type = sunrise ? "sunrise" : "sunset";
         String imageFileName = String.format("/tmp/%s.png", type);
-        Utils.saveImage(String.format("https://sunsetwx.com/%s/%s_et.png", type, type), imageFileName);
+        String imageUrlString = String.format("https://sunsetwx.com/%s/%s_et.png", type, type);
+        System.out.format("Image URL: %s.\n", imageUrlString);
+        Utils.saveImage(imageUrlString, imageFileName);
         bot.tweet(String.format("%s %s %s", "@pla1", text, "https://sunsetwx.com/"), imageFileName);
     }
 
