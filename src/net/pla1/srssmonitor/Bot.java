@@ -80,6 +80,7 @@ public class Bot {
             System.out.format("Typed file name %s.\n", imageFileName);
             s.type(Key.ENTER);
             System.out.println("Pressed ENTER.");
+            Utils.sleep(5);
             s.click("images/tweet_button_bigger.png");
             System.out.println("Clicked second tweet button.");
         } else {
