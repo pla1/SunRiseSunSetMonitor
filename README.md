@@ -6,3 +6,9 @@ Uses the following:
 * [GSON](https://github.com/google/gson) 
 * [SunsetWX.com](https://sunsetwx.com)
 * [sunrise-sunset.org](https://sunrise-sunset.org)
+
+Build executable jar:
+```
+cd ~/projects/SunRiseSunSetMonitor/
+mvn package
+```
