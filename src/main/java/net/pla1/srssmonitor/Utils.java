@@ -1,6 +1,5 @@
 package net.pla1.srssmonitor;
 
-import org.sikuli.script.Screen;
 
 import java.io.*;
 import java.net.URL;
@@ -144,16 +143,6 @@ public class Utils {
         calendar.setTime(date);
         return today.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)
                 && today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR);
-    }
-
-    public static void screenshot(Screen s) {
-        try {
-            File fromFile = new File(s.capture().getFile());
-            File toFile = File.createTempFile("screenshot_", ".png");
-            copyFile(fromFile, toFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void copyFile(File from, File to) throws IOException {
