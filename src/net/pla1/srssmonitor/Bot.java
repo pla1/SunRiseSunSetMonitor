@@ -68,6 +68,7 @@ public class Bot {
         System.out.println("Clicked compose new tweet banner");
         s.type(Key.TAB);
         System.out.println("Tabbed into textarea");
+        Utils.sleep(3);
         s.type(text);
         if (Utils.isNotBlank(imageFileName)) {
             s.click("images/camera_button.png");
