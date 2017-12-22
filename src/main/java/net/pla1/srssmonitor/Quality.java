@@ -1,10 +1,11 @@
 package net.pla1.srssmonitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Quality {
     private String type;
-    private ArrayList<Feature> features = new ArrayList<>();
+    private List<Feature> features = new ArrayList<>();
 
     public String getType() {
         return type;
@@ -14,7 +15,7 @@ public class Quality {
         this.type = type;
     }
 
-    public ArrayList<Feature> getFeatures() {
+    public List<Feature> getFeatures() {
         return features;
     }
 
