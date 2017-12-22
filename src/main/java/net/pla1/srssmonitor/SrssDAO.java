@@ -76,8 +76,8 @@ public class SrssDAO {
         String qualityString = quality.getFeatures().get(0).getProperties().getQuality();
         qualityString = Utils.toLower(qualityString);
         System.out.format("%s quality is %s.\n", type, qualityString);
-        if (!"Good".equalsIgnoreCase(qualityString)
-                && !"Great".equalsIgnoreCase(qualityString)) {
+        if (!"good".equals(qualityString)
+                && !"great".equals(qualityString)) {
             System.out.println("Quality is not good or great. Returning null.");
             //TODO Uncomment following line before production.
             //       return null;
