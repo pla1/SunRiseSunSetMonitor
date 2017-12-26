@@ -79,8 +79,7 @@ public class SrssDAO {
         if (!"good".equals(qualityString)
                 && !"great".equals(qualityString)) {
             System.out.println("Quality is not good or great. Returning null.");
-            //TODO Uncomment following line before production.
-            //       return null;
+            return null;
         }
         TimeDAO timeDAO = new TimeDAO();
         Time time;
@@ -93,7 +92,7 @@ public class SrssDAO {
             return null;
         }
         String timeDisplay = sunrise ? time.getResults().getSunriseDateDisplay() : time.getResults().getSunsetDateDisplay();
-        String tweetText = String.format("@pla1 %s quality is %s for %s. %s is at %s.",
+        String tweetText = String.format("%s quality is %s for %s. %s is at %s. #chswx",
                 type, qualityString, location, type, timeDisplay);
         System.out.println(tweetText);
         return tweetText;
