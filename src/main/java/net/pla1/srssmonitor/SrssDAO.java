@@ -61,6 +61,10 @@ public class SrssDAO {
         System.out.format("Token ID: %s Secret token: %s\n", twitter.verifyCredentials().getId(), accessToken);
         System.out.format("Sunrise: %s Latitude: %s Longitude: %s Location: %s\n", sunrise, latitude, longitude, location);
         String text = getTweetText(sunrise, latitude, longitude, location);
+        if (text == null) {
+            System.out.println("Tweet text is null. Not tweeting.");
+            return;
+        }
         StatusUpdate statusUpdate = new StatusUpdate(text);
         statusUpdate.setMedia(getImage(sunrise));
         twitter.updateStatus(statusUpdate);
