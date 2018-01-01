@@ -1,5 +1,5 @@
 # SunRiseSunSetMonitor
-Bot that monitors sunrise and sunset quality. Sends a tweet if quality is good or great. 
+Bot that monitors sunrise and sunset quality. Sends a tweet if quality is great.
 
 Uses the following:
 * [Twitter4J](http://twitter4j.org)

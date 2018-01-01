@@ -80,9 +80,8 @@ public class SrssDAO {
         String qualityString = quality.getFeatures().get(0).getProperties().getQuality();
         qualityString = Utils.toLower(qualityString);
         System.out.format("%s quality is %s.\n", type, qualityString);
-        if (!"good".equals(qualityString)
-                && !"great".equals(qualityString)) {
-            System.out.println("Quality is not good or great. Returning null.");
+        if (!"great".equals(qualityString)) {
+            System.out.println("Quality is not great. Returning null.");
             return null;
         }
         TimeDAO timeDAO = new TimeDAO();
